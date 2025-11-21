@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Productivity App Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+         TASKFLOW DEMO - Created by Niyi the Web Developer | Data saves to browser only
+    </div>
+
+    <!-- Watermark -->
+    <div class="watermark">Demo by <a href="https://niyithewebdeveloper.vercel.app" target="_blank"> the Web Developer</a></div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <div class="app-container">
+        <div class="header">
+            <div class="logo">TaskFlow</div>
+            <div class="tagline">Organize your work, boost your productivity</div>
+        </div>
+
+        <div class="app-controls">
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="taskSearch" placeholder="Search tasks...">
+            </div>
+            <div class="filter-controls">
+                <select id="priorityFilter" class="filter-btn">
+                    <option value="">All Priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <select id="categoryFilter" class="filter-btn">
+                    <option value="">All Categories</option>
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="health">Health</option>
+                </select>
+            </div>
+            <div class="view-toggle">
+                <button class="view-btn active">Board</button>
+                <button class="view-btn">List</button>
+            </div>
+        </div>
+
+        <div class="task-form">
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title *</label>
+                    <input type="text" id="taskTitle" placeholder="Enter task title" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+                    <textarea id="taskDescription" placeholder="Enter task description"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskCategory">Category</label>
+                        <select id="taskCategory">
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="health">Health</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="date" id="taskDueDate">
+                </div>
+                <button type="submit" class="add-task-btn">
+                    <span class="btn-text">Add Task</span>
+                    <span class="btn-loading" style="display: none;">Adding...</span>
+                </button>
+            </form>
+            <button class="sample-data-btn" onclick="addSampleData()">Add Sample Tasks</button>
+        </div>
+
+        <div class="board">
+            <div class="column todo">
+                <div class="column-header">
+                    To Do
+                    <span class="column-count" id="todoCount">0</span>
+                </div>
+                <div class="task-list" id="todoList" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="empty-state">No tasks yet. Add one above!</div>
+                </div>
+            </div>
+            
+            <div class="column in-progress">
+                <div class="column-header">
+                    In Progress
+                    <span class="column-count" id="inProgressCount">0</span>
+                </div>
+                <div class="task-list" id="inProgressList" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="empty-state">Drag tasks here when you start working</div>
+                </div>
+            </div>
+            
+            <div class="column done">
+                <div class="column-header">
+                    Done
+                    <span class="column-count" id="doneCount">0</span>
+                </div>
+                <div class="task-list" id="doneList" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="empty-state">Completed tasks will appear here</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <h3 id="totalTasks">0</h3>
+                <p>Total Tasks</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="completedTasks">0</h3>
+                <p>Completed</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="inProgressTasks">0</h3>
+                <p>In Progress</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="overdueTasks">0</h3>
+                <p>Overdue</p>
+            </div>
+        </div>
+
+        <div class="keyboard-shortcuts">
+            <h3>Keyboard Shortcuts</h3>
+            <div class="shortcut-item">
+                <span>Press Enter in title field</span>
+                <span>Add task quickly</span>
+            </div>
+            <div class="shortcut-item">
+                <span>Drag and drop</span>
+                <span>Move tasks between columns</span>
+            </div>
+            <div class="shortcut-item">
+                <span>Click Start/Complete</span>
+                <span>Move task to next stage</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
